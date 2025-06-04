@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<Comment>
+<div class="container">
+	<h2>Yorum Listesi</h2>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Ad/Soyad</th>
+				<th>Yorum</th>
+				<th>Tarih</th>
+				<th>Statüs</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>@(item.Customer.Name + " " + item.Customer.SurnName)</td>
+					<td>@Html.Raw(item.Content)</td>
+					<td>@item.CreatedDateTime.ToString("dd MMMM yyyy", new CultureInfo("tr-TR"))</td>
+					<td>
+						@if (item.IsActive)
+						{
+							<a href="/Comment/CommentStatusChange/@item.Id" class="btn btn-success">Aktif</a>
+						}
+						else
+						{
+							<a href="/Comment/CommentStatusChange/@item.Id" class="btn btn-danger">Pasif</a>
+						}
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
+

@@ -1,0 +1,54 @@
+﻿@using Blog.Helper
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model List<Customer>
+<div class="container">
+	<h2>Müşteri Listesi</h2>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Ad/Soyad</th>
+				<th>Email</th>
+				<th>Profil Foto</th>
+				<th>Tarih</th>
+				<th>Statüs</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.Id</td>
+					<td>@(item.Name + "" + item.SurnName)</td>
+					<td>@item.Email</td>
+					<td>
+
+						<img style="    width: 50px;
+    height: 50px;
+    object-fit: contain;" src="@($"{AppConfig.WebAPIUrl}{item.ProfilPhoto}")" />
+					</td>
+					<td>@item.CreatedDateTime.ToString("dd MMMM yyyy", new CultureInfo("tr-TR"))</td>
+					<td>
+						@if (item.IsActive)
+						{
+							<a class="btn btn-success">Aktif</a>
+						}
+						else
+						{
+							<a class="btn btn-danger">Pasif</a>
+						}
+					</td>
+				
+				</tr>
+			}
+
+		</tbody>
+	</table>
+</div>
+

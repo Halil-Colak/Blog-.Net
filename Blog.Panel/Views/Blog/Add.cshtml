@@ -1,0 +1,242 @@
+﻿@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css" />
+    <link href="~/css/post/add.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="~/js/post/add.js"></script>
+}
+@model List<Category>
+<h1>Blog Ekle</h1>
+
+<div class="container">
+
+
+<form id="myForm" asp-controller="Blog" asp-action="Add" method="post" enctype="multipart/form-data">
+    <div class="inputbox">
+        <label for="codeInput">Title</label>
+        <input name="Title" type="text" required />
+    </div>
+    <div class="inputbox">
+        <label for="codeInput">Description</label>
+        <textarea name="Description" required></textarea>
+    </div>
+
+    <div class="formImage">
+        <div>
+            <img src="#">
+            <i class="fa-regular fa-image"></i>
+        </div>
+        <div>
+            <input type="file" accept="image/*" name="Image" required />
+            <p>Resim yükleme formatı : JPG, JPEG, PNG, GIF, WEBP</p>
+        </div>
+    </div>
+    <div class="label-checkbox">
+
+        <label>
+            IsPopular
+            <input type="checkbox" value="true" name="IsPopular" />
+        </label>
+        <label>
+            IsActive
+            <input type="checkbox" value="true" name="IsActive" checked />
+        </label>
+    </div>
+
+    <label class="label-checkbox">
+        Kategori
+        <select id="TargetGroups" class="selectBox" multiple required name="BlogCategorys">
+            @foreach (var item in Model)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </label>
+
+
+    <div id="Detail">
+        <div id="Toolbar">
+            <button type="button" class="toolTypeBtn" id="SpaceBtn">
+                <i class="fa-solid fa-arrow-down"></i>
+                </button>
+            <button type="button" class="toolTypeBtn" id="AddLinkBtn">
+                <i class="fas fa-link"></i> <span class="toolType">Link</span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="BoldBtn">
+                <i class="fas fa-bold"></i> <span class="toolType">Bold</span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="ItalicBtn">
+                <i class="fas fa-italic"></i> <span class="toolType">Italic</span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="UnderlineBtn">
+                <i class="fas fa-underline"></i> <span class="toolType">Underline</span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="StrikethroughBtn">
+                <i class="fas fa-strikethrough"></i> <span class="toolType">Strikethrough</span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="ClearFormattingBtn">
+                <i class="fas fa-eraser"></i> <span class="toolType">Clear Formatting</span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="AddCodeBlockBtn">
+                <i class="fas fa-code"></i> <span class="toolType">Code</span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="AddImageBtn">
+                <i class="fas fa-image"></i> <span class="toolType">Image</span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="AddListBtn">
+                <i class="fas fa-list"></i> <span class="toolType">List</span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="HtmlOutputBtn">
+                <i class="fas fa-file-code"></i> <span class="toolType">
+                    Html
+                    Output
+                </span>
+            </button>
+            <button type="button" class="toolTypeBtn" id="BorderBoxBtn">
+                <i class="fas fa-border-all"></i> <span class="toolType">Border Box</span>
+            </button>
+
+            <!-- Arka Plan Rengi Seçimi -->
+            <select id="BgColorSelect" class="toolTypeBtn">
+                <option selected disabled>Arka Plan Rengi</option>
+                <option value="yellow">Sarı</option>
+                <option value="lightgray">Açık Gri</option>
+                <option value="lightblue">Açık Mavi</option>
+                <option value="lightgreen">Açık Yeşil</option>
+            </select>
+
+            <!-- Başlık Seçimi -->
+            <select id="HeadingSelect" class="toolTypeBtn">
+                <option selected disabled>Başlık</option>
+                <option value="h2">H2</option>
+                <option value="h3">H3</option>
+                <option value="h4">H4</option>
+                <option value="h5">H5</option>
+                <option value="h6">H6</option>
+            </select>
+        </div>
+        <span>Yazı Detay</span>
+        <div id="EditorBox" contenteditable="true">
+            <p>Buraya yazabilirsiniz...</p>
+        </div>
+    </div>
+<textarea name="Content" id="Content">
+
+</textarea>
+
+    <button class="btnGreen" type="submit" id="submit">EKLE</button>
+
+</form>
+</div>
+
+
+
+
+
+
+<!-- Code Popup-->
+<div id="CodePopup" class="popup">
+    <div id="CodePopupContent">
+        <h3>Kod Bloğu Ekle</h3>
+        <div class="inputbox">
+            <label for="languageSelect">Dil</label>
+            <select id="LanguageSelect">
+                <option value="javascript">JavaScript</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="python">Python</option>
+            </select>
+        </div>
+        <div class="inputbox">
+            <label for="codeInput">Kod</label>
+            <textarea id="CodeInput" rows="6"></textarea>
+        </div>
+        <div>
+            <button id="ClosePopupBtn" class="btnBlack">Kapat</button>
+            <button id="InsertCodeBtn" class="btnGreen">Ekle</button>
+        </div>
+    </div>
+</div>
+
+<!-- List Popup-->
+<div id="ListPopup" class="popup">
+    <div id="ListPopupContent">
+        <h3>Liste Ekle</h3>
+        <div class="inputbox">
+            <label for="listInput">Liste Öğeleri (Her öğe yeni satıra)</label>
+            <textarea id="ListInput" rows="6"></textarea>
+        </div>
+        <div>
+            <button class="btnBlack" id="CloseListPopupBtn">Kapat</button>
+            <button class="btnGreen" id="InsertListBtn">Ekle</button>
+        </div>
+    </div>
+</div>
+
+<!-- Image Popup -->
+<div id="ImagePopup" class="popup">
+    <div>
+        <h3>Resim Ekle</h3>
+        <div class="formImage">
+            <div>
+                <img src="#">
+                <i class="fa-regular fa-image"></i>
+            </div>
+            <div>
+                <input type="file" accept="image/*" id="ImageInput" />
+                <p>Resim yükleme formatı : JPG, JPEG, PNG, GIF, WEBP</p>
+            </div>
+        </div>
+        <div>
+            <button class="btnBlack" id="CloseImagePopupBtn">Kapat</button>
+            <button class="btnGreen" id="InsertImageBtn">Ekle</button>
+        </div>
+    </div>
+</div>
+
+<!-- Link Popup -->
+<div id="LinkPopup" class="popup">
+    <div id="LinkPopupContent">
+        <h3>Link Ekle</h3>
+        <div class="inputbox">
+            <label for="urlInput">URL(http://...)</label>
+            <input type="text" id="urlInput">
+        </div>
+        <div class="inputbox">
+            <label for="linkTextInput">Link Metni</label>
+            <input type="text" id="linkTextInput">
+        </div>
+        <div>
+            <button class="btnBlack" id="CloseLinkPopupBtn">Kapat</button>
+            <button class="btnGreen" id="InsertLinkBtn">Ekle</button>
+        </div>
+    </div>
+</div>
+
+<!-- Quote Popup -->
+<div id="QuotePopup" class="popup">
+    <div id="QuotePopupContent">
+        <h3>Alıtı Ekle</h3>
+        <div class="inputbox">
+            <label>Alıntı Resimi(URL)</label>
+            <input id="QuoteImage" type="text" />
+        </div>
+        <div class="inputbox">
+            <label>Alıntı Adresi(URL)</label>
+            <input id="QuoteWeb" type="text" />
+        </div>
+        <div class="inputbox">
+            <label>Alıntı Adı</label>
+            <input id="QuoteTitle" type="text" />
+        </div>
+        <div>
+            <button id="CloseQuotePopupBtn" class="btnBlack">Kapat</button>
+            <button id="InsertQuoteBtn" class="btnGreen">Ekle</button>
+        </div>
+    </div>
+</div>

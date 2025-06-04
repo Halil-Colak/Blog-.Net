@@ -1,0 +1,6 @@
+@Blog.Proxy_HostAddress = http://localhost:5099
+
+GET {{Blog.Proxy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

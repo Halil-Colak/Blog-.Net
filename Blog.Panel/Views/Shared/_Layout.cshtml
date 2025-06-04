@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Panel</title>
+
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
+    <!--Sill-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--Sill-->
+    <!--  Select 2 -->
+    <link href="~/lib/select2/select2.min.css" rel="stylesheet" />
+
+    <link href="~/css/general.css" rel="stylesheet" />
+
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a style="margin: 10px 14px;display: block;" href="/User/List" class="nav-link  mt-5">Kullanıcılar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="margin: 10px 14px;display: block;" href="/Category/List" class="nav-link  mt-5">Kategoriler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="margin: 10px 14px;display: block;" href="/Blog/List" class="nav-link  mt-5">Bloglar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="margin: 10px 14px;display: block;" href="/Customer/List" class="nav-link  mt-5">Müşteriler</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="margin: 10px 14px;display: block;" href="/Comment/List" class="nav-link  mt-5">Yorumlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="margin: 10px 14px;display: block;" href="/Report/List" class="nav-link  mt-5">Raporlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a style="margin: 10px 14px;display: block;" href="/Auth/Logout" class="nav-link mt-5">Çıkış yap</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+    @if (TempData["Success"] != null)
+    {
+        <div id="Alert" class="success">
+            <i class="fa-solid fa-circle-check "></i>
+            <span>@TempData["Success"]</span>
+        </div>
+    }
+    else if (TempData["Failed"] != null)
+    {
+        <div id="Alert" class="failed">
+            <i class="fa-solid fa-circle-check "></i>
+            <span>@TempData["Failed"]</span>
+        </div>
+    }
+    <div id="AlertJS"></div>
+
+    <script src="~/lib/jquery-3.7.1.min.js"></script>
+
+    <!--  Select 2 -->
+    <script src="~/lib/select2/select2.min.js"></script>
+    <script src="~/js/general.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

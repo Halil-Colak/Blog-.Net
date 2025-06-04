@@ -1,0 +1,26 @@
+﻿@{
+	ViewData["Title"] = "Update";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Category
+<div class="container">
+	<h2>Katagori Güncelle</h2>
+	<form asp-action="Update" asp-controller="Category" method="post">
+		<input type="hidden" value="@Model.Id" />
+		<div class="form-group">
+			<label for="email">Email:</label>
+			<input type="text" class="form-control" id="email" placeholder="Enter email" name="Name" value="@Model.Name">
+		</div>
+		<div class="checkbox">
+			@if (Model.IsActive)
+			{
+				<label><input type="checkbox" checked value="true" asp-for="IsActive">Status (seçili ise aktif olur.)</label>
+			}
+			else
+			{
+				<label><input type="checkbox" value="true" asp-for="IsActive">Status (seçili ise aktif olur.)</label>
+			}
+		</div>
+		<button type="submit" class="btn btn-default">Güncelle</button>
+	</form>
+</div>

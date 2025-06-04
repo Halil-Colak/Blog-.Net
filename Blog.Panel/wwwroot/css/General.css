@@ -1,0 +1,129 @@
+﻿/*#region Root*/
+@font-face {
+    font-family: 'poppins-medium';
+    src: url('../font/poppins-medium.ttf') format('truetype');
+}
+
+:root {
+    --white: #ffffff;
+    --black: #1f2937;
+    --gray: #d2d2d2;
+    --gray2: #1f2937cc;
+    --opacity-gray: #0006;
+}
+
+
+* {
+    
+    font-family: "poppins-medium", serif;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    outline: none;
+    font-weight: 500;
+    border: 0;
+    color: var(--text-color);
+}
+
+body {
+    min-height: 100vh;
+}
+/*#endregion*/
+:root {
+    --black: #000000;
+    --text-color: #242424;
+    --text-color-gray: #494949;
+    --gray: #f7f7f7;
+    --white: #ffff;
+    --border-black: 1px solid #000000;
+    --border-gray: solid 1px #d9d9d9;
+    --blue: #c4e2ff;
+    --green: #1A8917;
+    --red: #e43b3b;
+}
+/*#region Alert*/
+#Alert {
+    position: fixed;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    z-index: 100;
+    top: -100px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 13px;
+    opacity: 0;
+    animation: slideIn 0.5s ease forwards, slideOut 0.5s ease 2.5s forwards;
+}
+
+#AlertJS {
+    position: fixed;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    z-index: 100;
+    top: -100px;
+    right: 50%;
+    transform: translateX(50%);
+    font-size: 13px;
+    opacity: 0;
+    transition: top 0.5s ease, opacity 0.5s ease;
+}
+
+
+    #Alert > i,
+    #AlertJS > i {
+        font-size: 15px;
+    }
+
+.failed {
+    background: #f6cfce !important;
+}
+
+    .failed > i {
+        color: #ea5553;
+    }
+
+.success {
+    background: #d8f1d0 !important;
+}
+
+    .success > i {
+        color: #9ed08e;
+    }
+
+@keyframes slideIn {
+    0% {
+        top: -100px;
+        opacity: 0;
+    }
+
+    100% {
+        top: 13px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        top: 13px;
+        opacity: 1;
+    }
+
+    100% {
+        top: -100px;
+        opacity: 0;
+    }
+}
+/*#endregion*/
